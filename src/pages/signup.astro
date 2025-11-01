@@ -1,0 +1,85 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SignUpForm from "@/components/SignUp";
+import type { Usuarios } from "@/types/global";
+// import { type Usuarios } from "@/types/global";
+
+const USERS: Usuarios[] = [
+  {
+    name: "Carlos",
+    lastname: "Ramírez",
+    email: "carlos.ramirez@example.com",
+    password: "abc123-def456-ghi789-jkl012-mno345",
+    dni: 74851236,
+  },
+  {
+    name: "Lucía",
+    lastname: "Fernández",
+    email: "lucia.fernandez@example.com",
+    password: "qwe321-rty654-uio987-asd210-fgh543",
+    dni: 72694518,
+  },
+  {
+    name: "Diego",
+    lastname: "Salazar",
+    email: "diego.salazar@example.com",
+    password: "zxc111-vbn222-nmq333-plk444-jhg555",
+    dni: 73129485,
+  },
+  {
+    name: "Valeria",
+    lastname: "Mendoza",
+    email: "valeria.mendoza@example.com",
+    password: "poi666-lkj777-mnb888-uhy999-tgb000",
+    dni: 75418962,
+  },
+  {
+    name: "Andrés",
+    lastname: "Gutiérrez",
+    email: "andres.gutierrez@example.com",
+    password: "wer101-sdf202-ert303-dfg404-tyu505",
+    dni: 71583649,
+  },
+  {
+    name: "Sofía",
+    lastname: "Rojas",
+    email: "sofia.rojas@example.com",
+    password: "cvb606-bnm707-xza808-qwe909-rty010",
+    dni: 73215478,
+  },
+  {
+    name: "Luis",
+    lastname: "Torres",
+    email: "luis.torres@example.com",
+    password: "asd111-fgh222-jkl333-qwe444-zxc555",
+    dni: 72469135,
+  },
+  {
+    name: "Camila",
+    lastname: "Pérez",
+    email: "camila.perez@example.com",
+    password: "vbn666-mkl777-poi888-lkj999-uhy000",
+    dni: 75832461,
+  },
+  {
+    name: "Gabriel",
+    lastname: "Vargas",
+    email: "gabriel.vargas@example.com",
+    password: "bnm123-cxz234-vfr345-bgt456-nhy567",
+    dni: 74251683,
+  },
+  {
+    name: "Mariana",
+    lastname: "Lozano",
+    email: "mariana.lozano@example.com",
+    password: "tgb678-yhn789-uji890-klo901-mpo012",
+    dni: 71984325,
+  },
+];
+---
+
+<Layout>
+  <section class="min-h-screen grid place-content-center">
+    <SignUpForm lista={USERS} client:load />
+  </section>
+</Layout>
