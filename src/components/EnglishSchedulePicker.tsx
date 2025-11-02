@@ -92,7 +92,7 @@ export default function EnglishSchedulePicker() {
     },
   ];
 
-  const toggleSchedule = (scheduleId) => {
+  const toggleSchedule = (scheduleId: number) => {
     setSelectedSchedules((prev) => {
       if (prev.includes(scheduleId)) {
         return prev.filter((id) => id !== scheduleId);
