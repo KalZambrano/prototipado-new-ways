@@ -1,0 +1,10 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import EnglishSchedule from "@/components/EnglishSchedulePicker";
+---
+
+<Layout>
+    <section class="min-h-screen grid place-content-center">
+        <EnglishSchedule client:load />
+    </section>
+</Layout>
