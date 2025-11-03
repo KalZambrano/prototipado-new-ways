@@ -11,7 +11,7 @@ function MiFormulario() {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Campos incompletos",
+        text: "Contraseña Incorrecta",
       });
       return;
     }

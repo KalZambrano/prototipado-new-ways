@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import ScheduleManager from "@/components/ScheduleGestor";
+import NoWhere from "@/components/NoWhere";
 ---
 
 <Layout>
@@ -9,5 +10,6 @@ import ScheduleManager from "@/components/ScheduleGestor";
     </section>
     <section>
         <h2>Gestión de Pruebas</h2>
+        <NoWhere client:load/>
     </section>
 </Layout>

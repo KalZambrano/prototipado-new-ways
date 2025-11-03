@@ -34,6 +34,7 @@ import Footer from "@/components/Footer.astro";
         <p class="card-description-2">
           Estás en un nivel avanzado superior. ¡Sigue así!
         </p>
+        <a href="/schedule" class="btn btn-purple">Revisar prueba de nivel</a>
       </div>
     </div>
   </main>
@@ -206,8 +207,17 @@ import Footer from "@/components/Footer.astro";
     color: #667eea;
   }
 
+  .btn-purple {
+    background: #667eea;
+    color: white;
+  }
+
   .btn-white:hover {
     background: #f9fafb;
+    transform: scale(1.05);
+  }
+  .btn-purple:hover {
+    background: #6c83e8;
     transform: scale(1.05);
   }
 

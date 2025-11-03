@@ -119,6 +119,12 @@ const ScheduleManager = () => {
             : schedule
         )
       );
+
+      Swal.fire({
+        icon: "success",
+        title: "¡Listo!",
+        text: "Horario actualizado exitosamente",
+      })
     } else {
       const newSchedule = {
         ...formData,
@@ -129,6 +135,12 @@ const ScheduleManager = () => {
         capacity: parseInt(formData.capacity),
       };
       setSchedules([...schedules, newSchedule]);
+
+      Swal.fire({
+      icon: "success",
+      title: "¡Listo!",
+      text: "Horario creado exitosamente",
+    })
     }
 
     closeModal();
