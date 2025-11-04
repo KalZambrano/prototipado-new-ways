@@ -132,10 +132,14 @@ export default function EnglishSchedulePicker() {
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-6 py-6">
+      <div className="bg-white shadow-sm border-b border-slate-200 flex justify-between">
+        <div className="px-6 py-6">
           <h1 className="text-3xl font-bold text-slate-800">New Ways</h1>
           <p className="text-slate-600 mt-1">Diseña tu horario perfecto</p>
+        </div>
+        <div className="px-6 py-6 text-right">
+          <p>Curso a matricular</p>
+          <h3 className="text-xl font-bold">Advanced 2</h3>
         </div>
       </div>
 
