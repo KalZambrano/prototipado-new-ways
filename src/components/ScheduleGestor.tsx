@@ -15,7 +15,7 @@ import { LuCalendarDays } from "react-icons/lu";
 import Swal from "sweetalert2";
 
 const ScheduleManager = () => {
-  const [schedules, setSchedules] = useState([
+  const [schedules, setSchedules] = useState<Record<string, any>[]>([
     {
       id: 1,
       day: "Lunes y Miércoles",
@@ -70,7 +70,7 @@ const ScheduleManager = () => {
     "Miguel Ángel Vargas",
   ];
 
-  const openModal = (schedule = null) => {
+  const openModal = (schedule: any = null) => {
     if (schedule) {
       setEditingSchedule(schedule);
       setFormData({

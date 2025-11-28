@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 
 import Swal from "sweetalert2";
-const TestManager = () => {
+const EnglishTestGestor = () => {
   const [questions, setQuestions] = useState([
     {
       id: 1,
@@ -52,7 +52,7 @@ const TestManager = () => {
   ]);
 
   const [showModal, setShowModal] = useState(false);
-  const [editingQuestion, setEditingQuestion] = useState(null);
+  const [editingQuestion, setEditingQuestion] = useState<any>(null);
   const [formData, setFormData] = useState({
     question: "",
     options: ["", "", "", ""],
@@ -67,7 +67,7 @@ const TestManager = () => {
   const [filterType, setFilterType] = useState("all");
   const [filterLevel, setFilterLevel] = useState("all");
 
-  const openModal = (question = null) => {
+  const openModal = (question: any = null) => {
     if (question) {
       setEditingQuestion(question);
       setFormData({
@@ -126,16 +126,16 @@ const TestManager = () => {
         icon: "warning",
         title: "Error",
         text: "Por favor complete todos los campos",
-      })
+      });
       return;
     }
 
     if (editingQuestion) {
-        Swal.fire({
-            icon: "success",
-            title: "¡Listo!",
-            text: "Pregunta actualizada exitosamente",
-        })
+      Swal.fire({
+        icon: "success",
+        title: "¡Listo!",
+        text: "Pregunta actualizada exitosamente",
+      });
       setQuestions(
         questions.map((q) =>
           q.id === editingQuestion.id
@@ -144,11 +144,11 @@ const TestManager = () => {
         )
       );
     } else {
-        Swal.fire({
-            icon: "success",
-            title: "¡Listo!",
-            text: "Pregunta creada exitosamente",
-        })
+      Swal.fire({
+        icon: "success",
+        title: "¡Listo!",
+        text: "Pregunta creada exitosamente",
+      });
       const newQuestion = {
         ...formData,
         id:
@@ -164,23 +164,23 @@ const TestManager = () => {
 
   const handleDelete = (id: number) => {
     Swal.fire({
-        title: "¿Estás seguro?",
-        text: "¡No podrás revertir esto!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, ¡eliminar!",
-        cancelButtonText: "Cancelar",
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, ¡eliminar!",
+      cancelButtonText: "Cancelar",
     }).then((result) => {
-        if (result.isConfirmed) {
+      if (result.isConfirmed) {
         Swal.fire({
-            title: "¡Eliminado!",
-            text: "La pregunta ha sido eliminada.",
-            icon: "success",
+          title: "¡Eliminado!",
+          text: "La pregunta ha sido eliminada.",
+          icon: "success",
         });
         setQuestions(questions.filter((q) => q.id !== id));
-        }
+      }
     });
   };
 
@@ -211,7 +211,7 @@ const TestManager = () => {
   };
 
   const getLevelColor = (level: string) => {
-    const colors = {
+    const colors: Record<string, string> = {
       A1: "bg-yellow-100 text-yellow-700",
       A2: "bg-orange-100 text-orange-700",
       B1: "bg-cyan-100 text-cyan-700",
@@ -509,7 +509,7 @@ const TestManager = () => {
                     value={formData.question}
                     onChange={handleInputChange}
                     placeholder="Escribe la pregunta aquí..."
-                    rows="3"
+                    rows={3}
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors resize-none"
                   />
                 </div>
@@ -574,4 +574,4 @@ const TestManager = () => {
   );
 };
 
-export default TestManager;
+export default EnglishTestGestor;

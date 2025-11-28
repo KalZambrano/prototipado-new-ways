@@ -6,9 +6,9 @@ import { FiBookOpen } from "react-icons/fi";
 const EnglishLevelTest = () => {
   const [started, setStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState<Array<{ selected: number | null; correct: boolean; points: number }>>([]);
   const [showResults, setShowResults] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
   const questions = [
     // A1 - Básico

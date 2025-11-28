@@ -11,7 +11,7 @@ import { FaCheckCircle } from "react-icons/fa";
 export default function EnglishSchedulePicker() {
   // const [selectedLevel, setSelectedLevel] = useState('');
   const [selectedModality, setSelectedModality] = useState("");
-  const [selectedSchedules, setSelectedSchedules] = useState([]);
+  const [selectedSchedules, setSelectedSchedules] = useState<number[]>([]);
   const [step, setStep] = useState(1);
 
   //   const levels = [

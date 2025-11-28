@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import ScheduleManager from "@/components/ScheduleGestor";
 import NoWhere from "@/components/NoWhere";
-import TestManager from "@/components/EnglishTestGestor";
+import EnglishTestGestor from "@/components/EnglishTestGestor";
 ---
 
 <Layout>
@@ -14,6 +14,6 @@ import TestManager from "@/components/EnglishTestGestor";
         <NoWhere client:load/>
     </section>
     <section>
-        <TestManager client:load/>
+        <EnglishTestGestor client:load/>
     </section>
 </Layout>
