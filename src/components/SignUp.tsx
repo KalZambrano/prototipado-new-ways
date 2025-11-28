@@ -39,11 +39,14 @@ export default function SignUpForm({lista}: {lista: Usuarios[]}) {
         }
     
         try {
-          Swal.fire({
-            icon: "success",
-            title: "¡Listo!",
-            text: "Registro completo",
-          });
+          // Swal.fire({
+          //   icon: "success",
+          //   title: "¡Listo!",
+          //   text: "Registro completo",
+          // });
+
+          // Redirigir a /dashboard
+          window.location.href = "/user/newuser";
         } catch (err) {
           Swal.fire({
             icon: "warning",
