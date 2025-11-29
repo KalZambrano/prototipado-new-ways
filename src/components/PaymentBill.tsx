@@ -520,7 +520,7 @@ const PaymentInterface: React.FC = () => {
   // Pago exitoso
   if (step === "success") {
     return (
-      <div className="min-h-screen bg-linear-to-br from-green-50 to-emerald-100 p-8 flex items-center justify-center">
+      <div className="min-h-screen p-8 flex items-center justify-center">
         <div className="bg-white rounded-2xl shadow-xl p-12 max-w-md w-full text-center">
           <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
             <FaRegCheckCircle className="w-12 h-12 text-green-600" />

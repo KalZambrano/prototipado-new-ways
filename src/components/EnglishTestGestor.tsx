@@ -241,7 +241,7 @@ const EnglishTestGestor = () => {
   };
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen p-8 max-w-7xl mx-auto">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex justify-between items-center mb-4">

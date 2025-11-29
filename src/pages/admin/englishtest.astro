@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import EnglishTestGestor from "@/components/EnglishTestGestor";
+import ReturnBtn from "@/components/ReturnBtn.astro";
+---
+
+<Layout>
+    <ReturnBtn />
+    <section>
+        <EnglishTestGestor client:load/>
+    </section>
+</Layout>
