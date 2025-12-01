@@ -6,6 +6,7 @@ import {
   FaPen,
   FaRegTrashAlt,
   FaSave,
+  FaUserTie,
 } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import { FiMapPin, FiUsers, FiBookOpen } from "react-icons/fi";
@@ -14,7 +15,7 @@ import { LuCalendarDays } from "react-icons/lu";
 import Swal from "sweetalert2";
 
 const ScheduleManager = () => {
-  const [schedules, setSchedules] = useState([
+  const [schedules, setSchedules] = useState<Record<string, any>[]>([
     {
       id: 1,
       day: "Lunes y Miércoles",
@@ -22,6 +23,7 @@ const ScheduleManager = () => {
       capacity: 20,
       modality: "presencial",
       level: "A2",
+      teacher: "María González",
     },
     {
       id: 2,
@@ -30,6 +32,7 @@ const ScheduleManager = () => {
       capacity: 15,
       modality: "virtual",
       level: "B1",
+      teacher: "Carlos Ramírez",
     },
     {
       id: 3,
@@ -38,6 +41,7 @@ const ScheduleManager = () => {
       capacity: 25,
       modality: "presencial",
       level: "C1",
+      teacher: "Ana Patricia Silva",
     },
   ]);
 
@@ -53,8 +57,20 @@ const ScheduleManager = () => {
 
   const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
   const modalities = ["presencial", "virtual"];
+  const teachers = [
+    "María González",
+    "Carlos Ramírez",
+    "Ana Patricia Silva",
+    "Roberto Fernández",
+    "Lucía Martínez",
+    "Diego Torres",
+    "Sofía Mendoza",
+    "Javier Castillo",
+    "Patricia Rojas",
+    "Miguel Ángel Vargas",
+  ];
 
-  const openModal = (schedule = null) => {
+  const openModal = (schedule: any = null) => {
     if (schedule) {
       setEditingSchedule(schedule);
       setFormData({
@@ -124,7 +140,7 @@ const ScheduleManager = () => {
         icon: "success",
         title: "¡Listo!",
         text: "Horario actualizado exitosamente",
-      })
+      });
     } else {
       const newSchedule = {
         ...formData,
@@ -137,10 +153,10 @@ const ScheduleManager = () => {
       setSchedules([...schedules, newSchedule]);
 
       Swal.fire({
-      icon: "success",
-      title: "¡Listo!",
-      text: "Horario creado exitosamente",
-    })
+        icon: "success",
+        title: "¡Listo!",
+        text: "Horario creado exitosamente",
+      });
     }
 
     closeModal();
@@ -167,7 +183,7 @@ const ScheduleManager = () => {
       }
     });
     // if (window.confirm("¿Estás seguro de eliminar este horario?")) {
-      
+
     // }
   };
 
@@ -177,8 +193,6 @@ const ScheduleManager = () => {
         return "bg-blue-100 text-blue-700";
       case "virtual":
         return "bg-green-100 text-green-700";
-      case "híbrido":
-        return "bg-purple-100 text-purple-700";
       default:
         return "bg-gray-100 text-gray-700";
     }
@@ -248,6 +262,11 @@ const ScheduleManager = () => {
                 </div>
 
                 <div className="flex items-center gap-3 text-gray-700">
+                  <FaUserTie className="w-5 h-5 text-orange-500" />
+                  <span className="font-medium">{schedule.teacher}</span>
+                </div>
+
+                <div className="flex items-center gap-3 text-gray-700">
                   <FiUsers className="w-5 h-5 text-green-500" />
                   <span>
                     Capacidad:{" "}
@@ -310,7 +329,7 @@ const ScheduleManager = () => {
 
         {showModal && (
           <div className="fixed inset-0 bg-black/50  flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-screen overflow-y-auto">
               <div className="bg-linear-to-r from-blue-500 to-indigo-600 p-6 text-white">
                 <div className="flex justify-between items-center">
                   <h2 className="text-2xl font-bold">
@@ -352,6 +371,22 @@ const ScheduleManager = () => {
                     placeholder="Ej: 08:00 - 10:00 AM"
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-black"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Docente
+                  </label>
+                  <select
+                    name="teacher"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-black"
+                  >
+                    {teachers.map((teacher, index) => (
+                      <option key={index} value={teacher}>
+                        {teacher}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>

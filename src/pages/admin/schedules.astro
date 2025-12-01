@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ScheduleManager from "@/components/ScheduleGestor";
+import ReturnBtn from "@/components/ReturnBtn.astro";
+---
+
+<Layout>
+    <ReturnBtn />
+  <section>
+    <ScheduleManager client:load />
+  </section>
+</Layout>

@@ -1,15 +1,39 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import ScheduleManager from "@/components/ScheduleGestor";
-import NoWhere from "@/components/NoWhere";
+import CalendarIcon from "@/assets/calendar-cog.svg";
+import TestIcon from "@/assets/notebook.svg";
+
+const NAVIGATION_LINKS = [
+  { name: "Pruebas", href: "/admin/englishtest", icon: TestIcon },
+  { name: "Horarios", href: "/admin/schedules", icon: CalendarIcon },
+];
 ---
 
 <Layout>
-    <section>
-        <ScheduleManager client:load />
+  <main class="max-w-7xl mx-auto p-8">
+    <div class="bg-white rounded-2xl p-8">
+      <h2 class="font-bold text-4xl">Panel de Administración</h2>
+      <p>Bienvenido al panel de administración</p>
+      <p>Aqui puedes gestionar las pruebas y horarios</p>
+    </div>
+    <section class="grid grid-cols-2 m-4">
+      {
+        NAVIGATION_LINKS.map((link) => (
+          <a
+            class="bg-linear-to-b from-green-200 to-green-300/80 rounded-2xl m-4 p-8 flex items-center shadow-md gap-4 hover:-translate-y-2 transition-all"
+            href={link.href}
+          >
+            <div class="flex flex-col">
+              <link.icon class={`size-16`} />
+              <span class="text-xl font-semibold">{link.name}</span>
+            </div>
+            <p class="text-gray-900">
+              Aqui podras gestionar todo lo relacionado con {link.name}, como
+              crear, editar y eliminar
+            </p>
+          </a>
+        ))
+      }
     </section>
-    <section>
-        <h2>Gestión de Pruebas</h2>
-        <NoWhere client:load/>
-    </section>
+  </main>
 </Layout>

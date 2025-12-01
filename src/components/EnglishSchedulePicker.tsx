@@ -11,7 +11,7 @@ import { FaCheckCircle } from "react-icons/fa";
 export default function EnglishSchedulePicker() {
   // const [selectedLevel, setSelectedLevel] = useState('');
   const [selectedModality, setSelectedModality] = useState("");
-  const [selectedSchedules, setSelectedSchedules] = useState([]);
+  const [selectedSchedules, setSelectedSchedules] = useState<number[]>([]);
   const [step, setStep] = useState(1);
 
   //   const levels = [
@@ -126,16 +126,27 @@ export default function EnglishSchedulePicker() {
       icon: "success",
       title: "¡Listo!",
       text: "Matricula completada Exitosamente!",
+    }).then(() => {
+      const localSchedules = selectedSchedules.map((idx) => schedules[idx])
+      localStorage.setItem('schedules', JSON.stringify(localSchedules))
+      localStorage.setItem("level", "C2")
+      window.location.href = "/user";
     });
+    
+    // console.log(localSchedules)
   };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-6 py-6">
+      <div className="bg-white shadow-sm border-b border-slate-200 flex justify-between">
+        <div className="px-6 py-6">
           <h1 className="text-3xl font-bold text-slate-800">New Ways</h1>
           <p className="text-slate-600 mt-1">Diseña tu horario perfecto</p>
+        </div>
+        <div className="px-6 py-6 text-right">
+          <p>Curso a matricular</p>
+          <h3 className="text-xl font-bold">Advanced 2</h3>
         </div>
       </div>
 
@@ -175,32 +186,6 @@ export default function EnglishSchedulePicker() {
             </React.Fragment>
           ))}
         </div>
-
-        {/* Step 1: Level Selection */}
-        {/* {step === 1 && (
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-slate-800 mb-6">Selecciona tu nivel de inglés</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {levels.map((level) => (
-                <button
-                  key={level.id}
-                  onClick={() => setSelectedLevel(level.id)}
-                  className={`p-6 rounded-xl border-2 transition-all text-left ${
-                    selectedLevel === level.id
-                      ? 'border-blue-600 bg-blue-50 shadow-lg'
-                      : 'border-slate-200 bg-white hover:border-blue-300 hover:shadow-md'
-                  }`}
-                >
-                  <h3 className="text-lg font-bold text-slate-800">{level.name}</h3>
-                  <p className="text-sm text-slate-600 mt-1">{level.description}</p>
-                  {selectedLevel === level.id && (
-                    <FaCheckCircle className="w-6 h-6 text-blue-600 mt-3" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-        )} */}
 
         {/* Step 2: Modality Selection */}
         {step === 1 && (

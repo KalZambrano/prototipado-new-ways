@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import { PaymentCard } from "@/components/PaymentCard";
 ---
 
 <Layout>
@@ -14,7 +15,7 @@ import Footer from "@/components/Footer.astro";
     </div>
 
     <!-- Dashboard Grid -->
-    <div class="dashboard-grid">
+    <div class="grid grid-cols-2 gap-4 mt-4">
       <!-- Schedule Selection Card -->
       <div class="card schedule-card">
         <div class="card-icon">📅</div>
@@ -36,6 +37,7 @@ import Footer from "@/components/Footer.astro";
         </p>
         <a href="/schedule" class="btn btn-purple">Revisar prueba de nivel</a>
       </div>
+      <PaymentCard client:load/>
     </div>
   </main>
   <Footer/>
@@ -114,14 +116,6 @@ import Footer from "@/components/Footer.astro";
   .welcome-section p {
     color: #6b7280;
     font-size: 1.1rem;
-  }
-
-  /* Dashboard Grid */
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
   }
 
   /* Card Styles */
@@ -257,10 +251,6 @@ import Footer from "@/components/Footer.astro";
 
     .welcome-section h1 {
       font-size: 1.5rem;
-    }
-
-    .dashboard-grid {
-      grid-template-columns: 1fr;
     }
   }
 </style>
