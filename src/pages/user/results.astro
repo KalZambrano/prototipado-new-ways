@@ -1,0 +1,10 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { PopOverScore } from "@/components/PopOverScore";
+---
+
+<Layout>
+    <section class="min-h-screen grid place-content-center">
+        <PopOverScore client:load />
+    </section>
+</Layout>
