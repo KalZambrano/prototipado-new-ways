@@ -137,7 +137,7 @@ export default function EnglishSchedulePicker() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50">
+    <div className="">
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-slate-200 flex justify-between">
         <div className="px-6 py-6">
