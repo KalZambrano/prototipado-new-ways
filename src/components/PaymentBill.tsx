@@ -15,7 +15,7 @@ const PaymentInterface: React.FC = () => {
   useEffect(() => {
     // Verificar si estamos en el cliente antes de acceder a 'window'
     if (typeof window !== "undefined" && window.localStorage) {
-      const schedule = localStorage.getItem("schedules");
+      const schedule = localStorage.getItem("myschedule");
       setLocalData(JSON.parse(schedule!));
     }
   }, []);

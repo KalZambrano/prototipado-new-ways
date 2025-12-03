@@ -7,7 +7,7 @@ export function PaymentCard() {
   useEffect(() => {
     // Verificar si estamos en el cliente antes de acceder a 'window'
     if (typeof window !== "undefined" && window.localStorage) {
-      const schedule = localStorage.getItem("schedules");
+      const schedule = localStorage.getItem("myschedule");
       setScheduleData(JSON.parse(schedule!));
     }
   }, []);
@@ -25,7 +25,9 @@ export function PaymentCard() {
 
       <a
         href={`${scheduleData ? "/user/payment" : "/schedule"}`}
-        className={`${scheduleData ? "bg-green-500 cursor-pointer" : "cursor-not-allowed"} text-white py-3.5 px-7 rounded-xl inline-block hover:scale-105 transition-all font-semibold`}
+        className={`${
+          scheduleData ? "bg-green-500 cursor-pointer" : "cursor-not-allowed"
+        } text-white py-3.5 px-7 rounded-xl inline-block hover:scale-105 transition-all font-semibold`}
       >
         Realizar Pago
       </a>
