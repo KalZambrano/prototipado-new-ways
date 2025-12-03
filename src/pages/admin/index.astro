@@ -4,36 +4,94 @@ import CalendarIcon from "@/assets/calendar-cog.svg";
 import TestIcon from "@/assets/notebook.svg";
 
 const NAVIGATION_LINKS = [
-  { name: "Pruebas", href: "/admin/englishtest", icon: TestIcon },
-  { name: "Horarios", href: "/admin/schedules", icon: CalendarIcon },
+  { 
+    name: "Pruebas", 
+    href: "/admin/englishtest", 
+    icon: TestIcon,
+    description: "Crea, edita y gestiona las pruebas de inglés",
+    linear: "from-blue-500 to-cyan-500"
+  },
+  { 
+    name: "Horarios", 
+    href: "/admin/schedules", 
+    icon: CalendarIcon,
+    description: "Administra y organiza los horarios de clases",
+    linear: "from-purple-500 to-pink-500"
+  },
 ];
 ---
 
 <Layout>
-  <main class="max-w-7xl mx-auto p-8">
-    <div class="bg-white rounded-2xl p-8">
-      <h2 class="font-bold text-4xl">Panel de Administración</h2>
-      <p>Bienvenido al panel de administración</p>
-      <p>Aqui puedes gestionar las pruebas y horarios</p>
-    </div>
-    <section class="grid grid-cols-2 m-4">
-      {
-        NAVIGATION_LINKS.map((link) => (
+  <main class="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 p-8">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header Section -->
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm mb-6">
+          <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <span class="text-sm font-medium text-gray-600">Sistema activo</span>
+        </div>
+        
+        <h1 class="text-5xl font-bold text-gray-900 mb-3 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text">
+          Panel de Administración
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl">
+          Gestiona eficientemente las pruebas y horarios desde un solo lugar
+        </p>
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="grid md:grid-cols-2 gap-6">
+        {NAVIGATION_LINKS.map((link) => (
           <a
-            class="bg-linear-to-b from-green-200 to-green-300/80 rounded-2xl m-4 p-8 flex items-center shadow-md gap-4 hover:-translate-y-2 transition-all"
             href={link.href}
+            class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
           >
-            <div class="flex flex-col">
-              <link.icon class={`size-16`} />
-              <span class="text-xl font-semibold">{link.name}</span>
+            <div class={`absolute inset-0 bg-linear-to-br ${link.linear} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
+            
+            {/* <!-- Icon Container --> */}
+            <div class={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br ${link.linear} mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+              <link.icon class="size-8 text-white" />
             </div>
-            <p class="text-gray-900">
-              Aqui podras gestionar todo lo relacionado con {link.name}, como
-              crear, editar y eliminar
-            </p>
+
+            {/* <!-- Content --> */}
+            <div class="relative">
+              <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-linear-to-r group-hover:bg-clip-text group-hover:from-blue-600 group-hover:to-purple-600 transition-all">
+                {link.name}
+              </h3>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                {link.description}
+              </p>
+              
+              {/* <!-- Arrow Icon --> */}
+              <div class="flex items-center text-sm font-semibold text-gray-400 group-hover:text-blue-600 transition-colors">
+                <span class="mr-2">Acceder</span>
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+
+            {/* <!-- Decorative Elements --> */}
+            <div class="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-gray-100 to-transparent rounded-full -mr-16 -mt-16 opacity-50"></div>
           </a>
-        ))
-      }
-    </section>
+        ))}
+      </div>
+
+      <!-- Stats or Quick Info (Optional)
+      <div class="grid grid-cols-3 gap-4 mt-8">
+        <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
+          <p class="text-sm text-gray-600 mb-1">Acceso rápido</p>
+          <p class="text-2xl font-bold text-gray-900">2 módulos</p>
+        </div>
+        <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
+          <p class="text-sm text-gray-600 mb-1">Estado</p>
+          <p class="text-2xl font-bold text-green-600">Activo</p>
+        </div>
+        <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
+          <p class="text-sm text-gray-600 mb-1">Última actualización</p>
+          <p class="text-2xl font-bold text-gray-900">Hoy</p>
+        </div>
+      </div> -->
+    </div>
   </main>
 </Layout>

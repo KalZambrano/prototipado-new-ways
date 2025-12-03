@@ -1,9 +1,11 @@
 ---
 import PaymentBill from "@/components/PaymentBill";
 import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
 ---
 
 <Layout>
+    <Header/>
     <section class="min-h-screen grid place-content-center">
         <PaymentBill client:load />
     </section>

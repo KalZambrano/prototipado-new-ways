@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 // import { Calendar, Clock, Users, Video, MapPin, CheckCircle2 } from 'lucide-react';
-import { FaCalendarAlt } from "react-icons/fa";
-import { FaClock } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { FaVideo } from "react-icons/fa";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import { FaCheckCircle } from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaUsers,
+  FaVideo,
+  FaCheckCircle,
+  FaMapMarkerAlt,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
+
+import type { Schedule } from "@/types/global";
 
 export default function EnglishSchedulePicker() {
   // const [selectedLevel, setSelectedLevel] = useState('');
   const [selectedModality, setSelectedModality] = useState("");
   const [selectedSchedules, setSelectedSchedules] = useState<number[]>([]);
+  const [schedules, setSchedules] = useState<Array<Schedule>>([]);
   const [step, setStep] = useState(1);
+  const [level, setLevel] = useState("");
 
   //   const levels = [
   //     { id: 'basic1', name: 'Basic 1', description: 'Principiante absoluto' },
@@ -33,64 +40,17 @@ export default function EnglishSchedulePicker() {
     { id: "virtual", name: "Virtual", icon: FaVideo, color: "bg-purple-500" },
   ];
 
-  const schedules = [
-    {
-      id: 1,
-      day: "Lunes y Miércoles",
-      time: "08:00 - 10:00 AM",
-      capacity: "15/20",
-      modality: "presencial",
-    },
-    {
-      id: 2,
-      day: "Lunes y Miércoles",
-      time: "06:00 - 08:00 PM",
-      capacity: "18/20",
-      modality: "presencial",
-    },
-    {
-      id: 3,
-      day: "Martes y Jueves",
-      time: "10:00 AM - 12:00 PM",
-      capacity: "12/20",
-      modality: "virtual",
-    },
-    {
-      id: 4,
-      day: "Martes y Jueves",
-      time: "07:00 - 09:00 PM",
-      capacity: "16/20",
-      modality: "virtual",
-    },
-    {
-      id: 5,
-      day: "Miércoles y Viernes",
-      time: "02:00 - 04:00 PM",
-      capacity: "10/20",
-      modality: "presencial",
-    },
-    {
-      id: 6,
-      day: "Sábado",
-      time: "09:00 AM - 01:00 PM",
-      capacity: "14/20",
-      modality: "presencial",
-    },
-    {
-      id: 7,
-      day: "Sábado",
-      time: "02:00 - 06:00 PM",
-      capacity: "8/20",
-      modality: "virtual",
-    },
-    {
-      id: 8,
-      day: "Domingo",
-      time: "10:00 AM - 02:00 PM",
-      capacity: "11/20",
-      modality: "virtual",
-    },
-  ];
+  useEffect(() => {
+    const localSchedules = localStorage.getItem("schedules");
+    const localLevel = localStorage.getItem("results");
+    if (localLevel) {
+      setLevel(JSON.parse(localLevel));
+    }
+    if (localSchedules) {
+      setSchedules(JSON.parse(localSchedules));
+      // console.log(localSchedules)
+    }
+  }, []);
 
   const toggleSchedule = (scheduleId: number) => {
     setSelectedSchedules((prev) => {
@@ -101,10 +61,13 @@ export default function EnglishSchedulePicker() {
     });
   };
 
-  const filteredSchedules = selectedModality
-    ? schedules.filter((s) => s.modality === selectedModality)
-    : schedules;
+  const levelSchedule = schedules.filter((s) => s.level === level.level.split(" ")[0]);
+  // console.log(level.level.split(" ")[0]);
 
+  const filteredSchedules = selectedModality
+    ? levelSchedule.filter((s) => s.modality === selectedModality)
+    : levelSchedule;
+  // console.error(levelSchedule);
   const canProceed = () => {
     // if (step === 1) return selectedLevel;
     if (step === 1) return selectedModality;
@@ -127,17 +90,17 @@ export default function EnglishSchedulePicker() {
       title: "¡Listo!",
       text: "Matricula completada Exitosamente!",
     }).then(() => {
-      const localSchedules = selectedSchedules.map((idx) => schedules[idx])
-      localStorage.setItem('schedules', JSON.stringify(localSchedules))
-      localStorage.setItem("level", "C2")
+      const mySchedule = selectedSchedules.map((idx) => schedules[idx]);
+      localStorage.setItem("myschedule", JSON.stringify(mySchedule));
+      // localStorage.setItem("level", "C2");
       window.location.href = "/user";
     });
-    
+
     // console.log(localSchedules)
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50">
+    <div className="">
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-slate-200 flex justify-between">
         <div className="px-6 py-6">
@@ -146,7 +109,7 @@ export default function EnglishSchedulePicker() {
         </div>
         <div className="px-6 py-6 text-right">
           <p>Curso a matricular</p>
-          <h3 className="text-xl font-bold">Advanced 2</h3>
+          <h3 className="text-xl font-bold">{level.level}</h3>
         </div>
       </div>
 
@@ -244,8 +207,8 @@ export default function EnglishSchedulePicker() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredSchedules.map((schedule) => {
                 const isSelected = selectedSchedules.includes(schedule.id);
-                const [current, total] = schedule.capacity.split("/");
-                const percentage = (parseInt(current) / parseInt(total)) * 100;
+                // const [current, total] = schedule.capacity.split("/");
+                // const percentage = (parseInt(current) / parseInt(total)) * 100;
 
                 return (
                   <button
@@ -276,13 +239,21 @@ export default function EnglishSchedulePicker() {
                     </div>
 
                     <div className="flex items-center gap-2">
+                      <FaChalkboardTeacher className="w-4 h-4 text-slate-500" />
+                      <div className="flex-1">
+                        <div className="flex text-xs text-slate-600 mb-1">
+                          <span>{schedule.teacher}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
                       <FaUsers className="w-4 h-4 text-slate-500" />
                       <div className="flex-1">
                         <div className="flex justify-between text-xs text-slate-600 mb-1">
                           <span>Disponibilidad</span>
                           <span>{schedule.capacity}</span>
                         </div>
-                        <div className="w-full bg-slate-200 rounded-full h-2">
+                        {/* <div className="w-full bg-slate-200 rounded-full h-2">
                           <div
                             className={`h-2 rounded-full transition-all ${
                               percentage > 80
@@ -293,7 +264,7 @@ export default function EnglishSchedulePicker() {
                             }`}
                             style={{ width: `${percentage}%` }}
                           />
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </button>
@@ -323,7 +294,7 @@ export default function EnglishSchedulePicker() {
                     </div>
                     <div>
                       <p className="text-sm text-slate-600">Nivel</p>
-                      <p className="font-semibold text-slate-800">Advanced 2</p>
+                      <p className="font-semibold text-slate-800">{level.level}</p>
                     </div>
                   </div>
 

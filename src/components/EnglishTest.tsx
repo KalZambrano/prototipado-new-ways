@@ -2,15 +2,17 @@ import { useState } from 'react';
 // import { CheckCircle, XCircle, Award, BookOpen } from 'lucide-react';
 import { FaAward } from 'react-icons/fa';
 import { FiBookOpen } from "react-icons/fi";
+import type { Answer, Question } from '@/types/global';
+import levelTest from '@/lib/levelTest'
 
 const EnglishLevelTest = () => {
   const [started, setStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<Array<{ selected: number | null; correct: boolean; points: number }>>([]);
+  const [answers, setAnswers] = useState<Answer[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
-  const questions = [
+  const questions: Question[] = [
     // A1 - Básico
     {
       question: "Hello! My name ___ Maria.",
@@ -166,43 +168,6 @@ const EnglishLevelTest = () => {
     }
   };
 
-  const calculateLevel = () => {
-    const totalPoints = answers.reduce((sum, answer) => sum + answer.points, 0);
-    const maxPoints = questions.reduce((sum, q) => sum + q.points, 0);
-    const percentage = (totalPoints / maxPoints) * 100;
-    
-    let level = "";
-    let description = "";
-    let color = "";
-    
-    if (percentage >= 85) {
-      level = "C2 - Maestría";
-      description = "Tienes un dominio excepcional del inglés. Puedes comprender y expresarte en cualquier situación con fluidez y precisión.";
-      color = "from-purple-500 to-pink-600";
-    } else if (percentage >= 70) {
-      level = "C1 - Avanzado";
-      description = "Excelente nivel de inglés. Puedes comunicarte con fluidez en situaciones complejas y entender textos difíciles.";
-      color = "from-indigo-500 to-purple-600";
-    } else if (percentage >= 55) {
-      level = "B2 - Intermedio Alto";
-      description = "Buen dominio del inglés. Puedes interactuar con hablantes nativos con naturalidad y comprender textos complejos.";
-      color = "from-blue-500 to-indigo-600";
-    } else if (percentage >= 40) {
-      level = "B1 - Intermedio";
-      description = "Nivel intermedio sólido. Puedes desenvolverte en la mayoría de situaciones cotidianas y comprender textos claros.";
-      color = "from-cyan-500 to-blue-600";
-    } else if (percentage >= 25) {
-      level = "A2 - Elemental";
-      description = "Nivel básico consolidado. Puedes comunicarte en situaciones simples y familiares del día a día.";
-      color = "from-green-500 to-cyan-600";
-    } else {
-      level = "A1 - Principiante";
-      description = "Nivel inicial. Puedes comunicarte de forma básica en situaciones muy cotidianas. ¡Sigue practicando!";
-      color = "from-yellow-500 to-green-600";
-    }
-
-    return { totalPoints, maxPoints, percentage, level, description, color };
-  };
 
 //   const restart = () => {
 //     setStarted(false);
@@ -244,7 +209,8 @@ const EnglishLevelTest = () => {
   }
 
   if (showResults) {
-    const results = calculateLevel();
+    const results = levelTest(answers, questions);
+    localStorage.setItem("results", JSON.stringify(results));
     const correctAnswers = answers.filter(a => a.correct).length;
     
     return (
@@ -294,7 +260,7 @@ const EnglishLevelTest = () => {
             href='/user'
             className="bg-linear-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all px-4 block w-full text-center"
           >
-            Revisar nuevas funcionalidades
+            Ir al Menú Principal
           </a>
         </div>
       </div>

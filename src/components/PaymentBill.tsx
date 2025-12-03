@@ -15,7 +15,7 @@ const PaymentInterface: React.FC = () => {
   useEffect(() => {
     // Verificar si estamos en el cliente antes de acceder a 'window'
     if (typeof window !== "undefined" && window.localStorage) {
-      const schedule = localStorage.getItem("schedules");
+      const schedule = localStorage.getItem("myschedule");
       setLocalData(JSON.parse(schedule!));
     }
   }, []);
@@ -36,7 +36,7 @@ const PaymentInterface: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const enrollmentData = {
-    course: "Curso de Inglés - Nivel A2",
+    course: "Curso de Inglés - Nivel A1",
     amount: 350.0,
   };
 
