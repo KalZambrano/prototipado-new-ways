@@ -1,9 +1,11 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { PopOverScore } from "@/components/PopOverScore";
+import Header from "@/components/Header.astro";
 ---
 
 <Layout>
+    <Header/>
     <section class="min-h-screen grid place-content-center">
         <PopOverScore client:load />
     </section>

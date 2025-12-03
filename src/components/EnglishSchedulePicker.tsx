@@ -16,6 +16,7 @@ export default function EnglishSchedulePicker() {
   const [selectedSchedules, setSelectedSchedules] = useState<number[]>([]);
   const [schedules, setSchedules] = useState<Array<Schedule>>([]);
   const [step, setStep] = useState(1);
+  const [level, setLevel] = useState("");
 
   //   const levels = [
   //     { id: 'basic1', name: 'Basic 1', description: 'Principiante absoluto' },
@@ -38,9 +39,11 @@ export default function EnglishSchedulePicker() {
 
   useEffect(() => {
     const localSchedules = localStorage.getItem("schedules");
+    const localLevel = localStorage.getItem("results");
+    setLevel(JSON.parse(localLevel!));
     if (localSchedules) {
       setSchedules(JSON.parse(localSchedules));
-      console.log(localSchedules)
+      // console.log(localSchedules)
     }
   },[])
 
@@ -98,7 +101,7 @@ export default function EnglishSchedulePicker() {
         </div>
         <div className="px-6 py-6 text-right">
           <p>Curso a matricular</p>
-          <h3 className="text-xl font-bold">Advanced 2</h3>
+          <h3 className="text-xl font-bold">{level.level}</h3>
         </div>
       </div>
 
