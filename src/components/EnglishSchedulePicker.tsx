@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 // import { Calendar, Clock, Users, Video, MapPin, CheckCircle2 } from 'lucide-react';
-import { FaCalendarAlt } from "react-icons/fa";
-import { FaClock } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { FaVideo } from "react-icons/fa";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import { FaCheckCircle } from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaUsers,
+  FaVideo,
+  FaCheckCircle,
+  FaMapMarkerAlt,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 
 import type { Schedule } from "@/types/global";
 
@@ -40,12 +43,14 @@ export default function EnglishSchedulePicker() {
   useEffect(() => {
     const localSchedules = localStorage.getItem("schedules");
     const localLevel = localStorage.getItem("results");
-    setLevel(JSON.parse(localLevel!));
+    if (localLevel) {
+      setLevel(JSON.parse(localLevel));
+    }
     if (localSchedules) {
       setSchedules(JSON.parse(localSchedules));
       // console.log(localSchedules)
     }
-  },[])
+  }, []);
 
   const toggleSchedule = (scheduleId: number) => {
     setSelectedSchedules((prev) => {
@@ -56,10 +61,13 @@ export default function EnglishSchedulePicker() {
     });
   };
 
-  const filteredSchedules = selectedModality
-    ? schedules.filter((s) => s.modality === selectedModality)
-    : schedules;
+  const levelSchedule = schedules.filter((s) => s.level === level.level.split(" ")[0]);
+  // console.log(level.level.split(" ")[0]);
 
+  const filteredSchedules = selectedModality
+    ? levelSchedule.filter((s) => s.modality === selectedModality)
+    : levelSchedule;
+  // console.error(levelSchedule);
   const canProceed = () => {
     // if (step === 1) return selectedLevel;
     if (step === 1) return selectedModality;
@@ -82,12 +90,12 @@ export default function EnglishSchedulePicker() {
       title: "¡Listo!",
       text: "Matricula completada Exitosamente!",
     }).then(() => {
-      const mySchedule = selectedSchedules.map((idx) => schedules[idx])
-      localStorage.setItem('myschedule', JSON.stringify(mySchedule))
-      localStorage.setItem("level", "C2")
+      const mySchedule = selectedSchedules.map((idx) => schedules[idx]);
+      localStorage.setItem("myschedule", JSON.stringify(mySchedule));
+      // localStorage.setItem("level", "C2");
       window.location.href = "/user";
     });
-    
+
     // console.log(localSchedules)
   };
 
@@ -231,6 +239,14 @@ export default function EnglishSchedulePicker() {
                     </div>
 
                     <div className="flex items-center gap-2">
+                      <FaChalkboardTeacher className="w-4 h-4 text-slate-500" />
+                      <div className="flex-1">
+                        <div className="flex text-xs text-slate-600 mb-1">
+                          <span>{schedule.teacher}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
                       <FaUsers className="w-4 h-4 text-slate-500" />
                       <div className="flex-1">
                         <div className="flex justify-between text-xs text-slate-600 mb-1">
@@ -278,7 +294,7 @@ export default function EnglishSchedulePicker() {
                     </div>
                     <div>
                       <p className="text-sm text-slate-600">Nivel</p>
-                      <p className="font-semibold text-slate-800">Advanced 2</p>
+                      <p className="font-semibold text-slate-800">{level.level}</p>
                     </div>
                   </div>
 

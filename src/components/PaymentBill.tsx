@@ -36,7 +36,7 @@ const PaymentInterface: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const enrollmentData = {
-    course: "Curso de Inglés - Nivel A2",
+    course: "Curso de Inglés - Nivel A1",
     amount: 350.0,
   };
 
